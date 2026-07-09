@@ -18,6 +18,7 @@ import { Route as DiseasesIndexRouteImport } from './routes/diseases.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as DiseasesSlugRouteImport } from './routes/diseases.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ApiAppointmentRouteImport } from './routes/api.appointment'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -64,6 +65,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAppointmentRoute = ApiAppointmentRouteImport.update({
+  id: '/api/appointment',
+  path: '/api/appointment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/homoeopathy': typeof HomoeopathyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/appointment': typeof ApiAppointmentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/diseases/$slug': typeof DiseasesSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/homoeopathy': typeof HomoeopathyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/appointment': typeof ApiAppointmentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/diseases/$slug': typeof DiseasesSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/homoeopathy': typeof HomoeopathyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/appointment': typeof ApiAppointmentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/diseases/$slug': typeof DiseasesSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/homoeopathy'
     | '/sitemap.xml'
+    | '/api/appointment'
     | '/blog/$slug'
     | '/diseases/$slug'
     | '/blog/'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/homoeopathy'
     | '/sitemap.xml'
+    | '/api/appointment'
     | '/blog/$slug'
     | '/diseases/$slug'
     | '/blog'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/homoeopathy'
     | '/sitemap.xml'
+    | '/api/appointment'
     | '/blog/$slug'
     | '/diseases/$slug'
     | '/blog/'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HomoeopathyRoute: typeof HomoeopathyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiAppointmentRoute: typeof ApiAppointmentRoute
   BlogSlugRoute: typeof BlogSlugRoute
   DiseasesSlugRoute: typeof DiseasesSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/appointment': {
+      id: '/api/appointment'
+      path: '/api/appointment'
+      fullPath: '/api/appointment'
+      preLoaderRoute: typeof ApiAppointmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HomoeopathyRoute: HomoeopathyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiAppointmentRoute: ApiAppointmentRoute,
   BlogSlugRoute: BlogSlugRoute,
   DiseasesSlugRoute: DiseasesSlugRoute,
   BlogIndexRoute: BlogIndexRoute,

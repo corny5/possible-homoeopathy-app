@@ -1,5 +1,5 @@
 import { useMemo, useState, type FormEvent } from "react";
-import { CheckCircle2, MessageCircle, Upload } from "lucide-react";
+import { CheckCircle2, Loader2, MessageCircle, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +30,8 @@ export function AppointmentForm({ defaultConcern = "" }: { defaultConcern?: stri
 
   const [slug, setSlug] = useState(initialSlug);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [scales, setScales] = useState<Record<string, number>>({});
   const [checks, setChecks] = useState<Record<string, string[]>>({});
 
@@ -47,10 +49,57 @@ export function AppointmentForm({ defaultConcern = "" }: { defaultConcern?: stri
       };
     });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo({ top: window.scrollY - 100, behavior: "smooth" });
+    if (submitting) return;
+
+    const form = new FormData(e.currentTarget);
+    const answers = questionnaire.flatMap((section) =>
+      section.fields.map((field) => {
+        const value =
+          field.type === "scale"
+            ? scales[field.name] != null
+              ? String(scales[field.name])
+              : ""
+            : field.type === "checkbox"
+              ? (checks[field.name] ?? []).join(", ")
+              : String(form.get(field.name) ?? "");
+        return { label: field.label, value };
+      }),
+    );
+
+    const payload = {
+      honeypot: String(form.get("company") ?? ""),
+      name: String(form.get("name") ?? ""),
+      phone: String(form.get("phone") ?? ""),
+      email: String(form.get("email") ?? ""),
+      age: String(form.get("age") ?? ""),
+      gender: String(form.get("gender") ?? ""),
+      city: String(form.get("city") ?? ""),
+      conditionName: selected?.name ?? "",
+      consultationType: String(form.get("type") ?? ""),
+      slot: String(form.get("slot") ?? ""),
+      message: String(form.get("message") ?? ""),
+      fileCount: form.getAll("reports").filter((f) => f instanceof File && f.size > 0).length,
+      answers,
+    };
+
+    setSubmitting(true);
+    setError("");
+    try {
+      const res = await fetch("/api/appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+      window.scrollTo({ top: window.scrollY - 100, behavior: "smooth" });
+    } catch {
+      setError("Something went wrong sending your request. Please try WhatsApp or call us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -176,6 +225,15 @@ export function AppointmentForm({ defaultConcern = "" }: { defaultConcern?: stri
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-6 rounded-2xl border bg-card p-6 shadow-card sm:p-8">
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
+
       {/* Condition selector */}
       <div className="grid gap-2 rounded-xl bg-secondary/60 p-4">
         <Label htmlFor="condition" className="text-base font-semibold">
@@ -309,8 +367,13 @@ export function AppointmentForm({ defaultConcern = "" }: { defaultConcern?: stri
         <Textarea id="message" name="message" rows={2} placeholder="Anything else you'd like us to know?" />
       </div>
 
-      <Button type="submit" size="lg" className="w-full">
-        Request Appointment
+      {error && (
+        <p className="rounded-md bg-destructive/10 px-4 py-2.5 text-sm text-destructive">{error}</p>
+      )}
+
+      <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+        {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
+        {submitting ? "Sending…" : "Request Appointment"}
       </Button>
 
       <div className="flex flex-col items-center gap-3 border-t pt-5 text-center">

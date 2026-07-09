@@ -1,7 +1,7 @@
 export const PHONE = "9167727476";
 export const PHONE_INTL = "919167727476";
 export const WHATSAPP_URL = `https://wa.me/${PHONE_INTL}`;
-export const EMAIL = "contact@possiblehomeopathy.com";
+export const EMAIL = "contact@possiblehomoeopathy.com";
 
 export const CLINIC_NAME = "Possible Homoeopathy";
 export const TAGLINE = "Research-Backed Healing. Personalised Care.";
