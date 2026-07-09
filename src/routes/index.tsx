@@ -206,7 +206,7 @@ function HomePage() {
           <Reveal>
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-primary/10 shadow-card">
               <img
-                src="/images/doctor.svg"
+                src="/images/dr-golder.png"
                 alt="Dr. Amar A Golder"
                 className="h-full w-full object-cover"
               />

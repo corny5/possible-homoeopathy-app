@@ -45,7 +45,7 @@ function AboutPage() {
             </div>
           </div>
           <div className="mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-white/10 shadow-card">
-            <img src="/images/doctor.svg" alt="Dr. Amar A Golder" className="h-full w-full object-cover" />
+            <img src="/images/dr-golder.png" alt="Dr. Amar A Golder" className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

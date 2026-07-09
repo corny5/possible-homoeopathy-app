@@ -205,7 +205,7 @@ function DiseasePage() {
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl border bg-card p-6 text-center shadow-card">
               <div className="mx-auto h-24 w-24 overflow-hidden rounded-full bg-secondary">
-                <img src="/images/doctor.svg" alt="Dr. Amar A Golder" className="h-full w-full object-cover" />
+                <img src="/images/dr-golder.png" alt="Dr. Amar A Golder" className="h-full w-full object-cover" />
               </div>
               <h3 className="mt-4 font-heading text-lg font-bold text-foreground">
                 Dr. Amar A Golder
