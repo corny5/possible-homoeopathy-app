@@ -13,7 +13,7 @@ function Logo() {
       <img
         src={logo}
         alt="Possible Homoeopathy — The Holistic Healers"
-        className="h-9 w-auto sm:h-10"
+        className="h-10 w-auto sm:h-12"
       />
     </Link>
   );

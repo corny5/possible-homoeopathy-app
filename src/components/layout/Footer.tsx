@@ -11,7 +11,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="inline-flex rounded-lg bg-white/95 px-3 py-2">
-            <img src={logo} alt="Possible Homoeopathy" className="h-9 w-auto" />
+            <img src={logo} alt="Possible Homoeopathy" className="h-10 w-auto" />
           </div>
           <p className="mt-3 text-sm text-white/70">{TAGLINE}</p>
           <div className="mt-4 flex gap-3">
