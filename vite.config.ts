@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Hostinger's Node.js app hosting runs a plain Node process (via Passenger), not
+  // Cloudflare Workers — override the shared config's cloudflare-module default.
+  nitro: {
+    preset: "node-server",
+  },
 });
