@@ -61,6 +61,55 @@ export const testimonials = [
   },
 ];
 
+export const doctors = [
+  {
+    slug: "sneha-ghonamode",
+    name: "Dr. Sneha G. Ghonamode",
+    qualifications: "BHMS, CGO, PGDEMS",
+    title: "Consultant Homoeopath | Gynaecology, Infertility & Pain Management Specialist",
+    photo: "/images/sneha.jpg",
+    bio: [
+      "Dr. Sneha G. Ghonamode is a compassionate and skilled homoeopathic physician with a special interest in Women's Health, Infertility, Acute Pain Management, and Obesity Management.",
+      "She is committed to delivering personalised, evidence-based homoeopathic care that focuses on identifying and treating the root cause of disease, helping patients achieve lasting health and well-being.",
+    ],
+    focusAreas: [
+      "PCOS / PCOD",
+      "Infertility",
+      "Menstrual Irregularities",
+      "Hormonal Imbalances",
+      "Pelvic Pain",
+      "Migraines",
+      "Joint & Musculoskeletal Pain",
+      "Obesity Management",
+      "Women's Health Concerns",
+    ],
+  },
+  {
+    slug: "sana-farooqui",
+    name: "Dr. Sana Farooqui",
+    qualifications: "BHMS, MD (Homoeopathic Psychiatry)",
+    title: "Consultant Homoeopath | Mental Health & Psychiatric Care Specialist",
+    photo: "/images/sana.jpg",
+    bio: [
+      "Dr. Sana Farooqui is a dedicated mental health consultant who believes that every individual deserves to be heard with compassion, understanding, and respect. Through personalised online consultations, she helps people navigate emotional and psychological challenges while focusing on their overall well-being, not just their symptoms.",
+      "Every consultation takes place in a safe, confidential, and judgment-free space where patients can speak openly and comfortably. Treatment is tailored to each person's unique experiences, personality, and health needs.",
+      "With a calm, patient-centred approach, Dr. Farooqui is committed to helping individuals build emotional resilience, regain confidence, and improve their quality of life through proper counselling and medication — supporting every patient on their journey toward better mental and emotional health with compassionate, individualised homoeopathic care.",
+    ],
+    focusAreas: [
+      "Anxiety & Panic Attacks",
+      "Depression",
+      "Stress & Overthinking",
+      "Fear / Phobia",
+      "Sleep Problems",
+      "Mood Changes",
+      "Relationship Difficulties",
+      "Grief & Emotional Trauma",
+      "Stress-Related Physical Complaints",
+      "Psychiatric Disorders",
+    ],
+  },
+];
+
 export const howItWorks = [
   {
     title: "Book Appointment",

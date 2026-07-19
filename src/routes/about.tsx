@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Award, GraduationCap, BookOpen, Trophy, Users, Check } from "lucide-react";
+import { Award, GraduationCap, BookOpen, Trophy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { doctors } from "@/lib/site-data";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -116,19 +118,56 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeading
             title="Our Team of Doctors"
-            subtitle="5 expert doctors dedicated to your healing journey"
+            subtitle="Meet the specialists behind your care"
           />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[1, 2, 3, 4].map((n) => (
-              <Reveal key={n} delay={n * 80}>
-                <div className="rounded-2xl border bg-card p-6 text-center shadow-md">
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-secondary text-primary">
-                    <Users className="h-9 w-9" />
+          <div className="mt-14 space-y-16">
+            {doctors.map((doctor, i) => (
+              <Reveal key={doctor.slug} delay={i * 100}>
+                <div
+                  className={`grid items-start gap-10 lg:grid-cols-2 ${
+                    i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                  }`}
+                >
+                  <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-primary/10 shadow-card">
+                    <img
+                      src={doctor.photo}
+                      alt={doctor.name}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute bottom-4 left-4 rounded-xl bg-card px-4 py-2 shadow-md">
+                      <div className="font-heading text-sm font-bold text-primary">
+                        {doctor.qualifications}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="mt-4 font-heading text-base font-semibold text-foreground">
-                    Dr. Team Member {n}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">Homeopathic Consultant</p>
+                  <div>
+                    <h3 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">
+                      {doctor.name}
+                    </h3>
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground">
+                      <Award className="h-4 w-4 text-gold" /> {doctor.title}
+                    </div>
+                    <div className="mt-5 space-y-4 text-muted-foreground">
+                      {doctor.bio.map((para) => (
+                        <p key={para}>{para}</p>
+                      ))}
+                    </div>
+                    <h4 className="mt-6 font-heading text-sm font-semibold text-foreground">
+                      Areas of Care
+                    </h4>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {doctor.focusAreas.map((area) => (
+                        <Badge key={area} variant="secondary" className="font-medium">
+                          {area}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="mt-8">
+                      <Button asChild size="lg">
+                        <Link to="/contact">Book a Consultation</Link>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             ))}
